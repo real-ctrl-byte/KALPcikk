@@ -44,9 +44,10 @@
 
     <div class="heart-area">
 
-      <div id="leftHearts"></div>
+      <div class="side-glow left-glow"></div>
+      <div class="side-glow right-glow"></div>
 
-      <div id="rightHearts"></div>
+      <div id="heartParticles"></div>
 
       <div class="center-letter">
         A
@@ -55,7 +56,7 @@
     </div>
 
 
-    <!-- KALBİME DOKUN BUTONU -->
+    <!-- BUTON -->
 
     <button id="loveButton">
       ❤️ Kalbime Dokun
@@ -64,33 +65,22 @@
 
     <!-- ROMANTİK MESAJ -->
 
-    <div
-      id="loveMessage"
-      class="love-message"
-    >
+    <div id="loveMessage" class="love-message">
 
       <div class="message-moon">
         ☾
       </div>
 
-
       <p>
-
-        Ay ışığının altında,
-
-        <br><br>
-
-        Karanlığım ve aydınlığım olman,
-
-        <br>
-
-        her şeyim anlamına gelmen,
-
-        <br>
-
+        Ay ışığının altında,<br><br>
+        Karanlığım ve aydınlığım olman,<br>
+        her şeyim anlamına gelmen,<br>
         eşsizliğini anlatıyor bitanem.
-
       </p>
+
+      <div class="message-heart">
+        ♥
+      </div>
 
     </div>
 
@@ -98,31 +88,19 @@
 
 
 
-  <!-- ========================= -->
-  <!-- EKRANA DOKUNUP MESAJ YAZMA -->
-  <!-- ========================= -->
+  <!-- DOKUNUNCA AÇILAN YAZI KUTUSU -->
 
-
-  <div
-    id="touchMessageBox"
-    class="touch-message-box"
-  >
+  <div id="touchMessageBox" class="touch-message-box">
 
     <div class="touch-card">
 
-
-      <button
-        id="closeTouchBox"
-        class="close-touch"
-      >
+      <button id="closeTouchBox" class="close-touch">
         ×
       </button>
-
 
       <h2>
         Bir şey yaz ❤️
       </h2>
-
 
       <textarea
         id="touchInput"
@@ -130,27 +108,26 @@
         maxlength="120"
       ></textarea>
 
-
       <button id="placeMessageButton">
         Kalbe Yaz 💗
       </button>
-
 
     </div>
 
   </div>
 
 
-  <!-- YAZILAN MESAJLAR BURADA ÇIKACAK -->
+  <!-- YAZILAN MESAJLAR -->
 
   <div id="writtenMessages"></div>
 
 
+  <!-- ARKA PLAN KALPLERİ -->
 
-  <!-- JAVASCRIPT -->
+  <div id="backgroundHearts"></div>
+
 
   <script src="script.js"></script>
-
 
 </body>
 
