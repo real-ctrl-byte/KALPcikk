@@ -1,51 +1,124 @@
-const heartContainer = document.getElementById("heart-container");
-const loveButton = document.getElementById("loveButton");
-const secretMessage = document.getElementById("secretMessage");
+const loveButton =
+    document.getElementById("loveButton");
 
-function createHeart() {
-  const heart = document.createElement("div");
+const heartButton =
+    document.getElementById("heartButton");
 
-  heart.classList.add("heart");
+const loveMessage =
+    document.getElementById("loveMessage");
 
-  const hearts = [
-    "❤️",
-    "💗",
-    "💕",
-    "💖",
-    "💘"
-  ];
+const floatingHearts =
+    document.getElementById("floatingHearts");
 
-  heart.innerHTML =
-    hearts[Math.floor(Math.random() * hearts.length)];
 
-  heart.style.left =
-    Math.random() * 100 + "vw";
+function showLoveMessage() {
 
-  heart.style.fontSize =
-    Math.random() * 20 + 18 + "px";
+    loveMessage.classList.add("show");
 
-  heart.style.animationDuration =
-    Math.random() * 3 + 4 + "s";
+    loveButton.innerHTML =
+        "❤️ Sen Benim Her Şeyimsin";
 
-  heart.style.opacity =
-    Math.random() * 0.5 + 0.5;
+    createHeartExplosion();
 
-  heartContainer.appendChild(heart);
+    setTimeout(() => {
 
-  setTimeout(() => {
-    heart.remove();
-  }, 7000);
+        loveMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 500);
 }
 
-setInterval(createHeart, 450);
 
-loveButton.addEventListener("click", () => {
+loveButton.addEventListener(
+    "click",
+    showLoveMessage
+);
 
-  secretMessage.classList.add("show");
 
-  for (let i = 0; i < 25; i++) {
-    setTimeout(createHeart, i * 80);
-  }
+heartButton.addEventListener(
+    "click",
+    showLoveMessage
+);
 
-  loveButton.innerHTML = "Seni Seviyorum ❤️";
-});
+
+/* KALP OLUŞTUR */
+
+function createHeart() {
+
+    const heart =
+        document.createElement("div");
+
+    heart.classList.add(
+        "floating-heart"
+    );
+
+    const heartTypes = [
+        "♥",
+        "♡",
+        "❤",
+        "💕"
+    ];
+
+    heart.innerHTML =
+        heartTypes[
+            Math.floor(
+                Math.random()
+                * heartTypes.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+
+    heart.style.fontSize =
+        Math.random() * 22 + 15 + "px";
+
+
+    heart.style.animationDuration =
+        Math.random() * 4 + 5 + "s";
+
+
+    floatingHearts.appendChild(
+        heart
+    );
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 9000);
+}
+
+
+/* NORMAL KALPLER */
+
+setInterval(
+    createHeart,
+    650
+);
+
+
+/* TIKLAYINCA KALP PATLAMASI */
+
+function createHeartExplosion() {
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        setTimeout(() => {
+
+            createHeart();
+
+        }, i * 45);
+
+    }
+
+}
