@@ -1,16 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kalp Animasyonu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sana Özel ❤️</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="kalp"></canvas>
 
-  <script>
-    const canvas = document.getElementById("kalp");
-    const ctx = canvas.getContext("2d");
-  </script>
+  <div class="overlay"></div>
+
+  <main class="hero">
+    <div class="card">
+      <div class="flower">🌸</div>
+
+      <h1>Sana Özel ❤️</h1>
+
+      <p class="message">
+        Hayatıma kattığın her güzel an için teşekkür ederim.
+        Seninle her şey daha güzel.
+      </p>
+
+      <div class="lilies">
+        🌺 🌸 🌺
+      </div>
+
+      <button id="loveButton">
+        Kalbime Dokun ❤️
+      </button>
+
+      <p id="secretMessage" class="secret-message">
+        Seni çok seviyorum ❤️
+      </p>
+    </div>
+  </main>
+
+  <div id="heart-container"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
