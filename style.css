@@ -1,510 +1,541 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    min-height: 100vh;
-    overflow-x: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 
-    font-family: Georgia, "Times New Roman", serif;
+  font-family: Georgia, "Times New Roman", serif;
+  color: white;
 
-    background:
-        radial-gradient(circle at 50% 70%,
-        rgba(255, 80, 130, 0.35),
-        transparent 40%),
+  background:
+    radial-gradient(circle at 50% 70%,
+      rgba(255, 60, 120, 0.18),
+      transparent 32%),
 
-        linear-gradient(
-        180deg,
-        #351522,
-        #641f35 55%,
-        #210d18
-        );
+    radial-gradient(circle at 50% 5%,
+      rgba(255, 255, 220, 0.1),
+      transparent 20%),
 
-    color: white;
+    linear-gradient(
+      180deg,
+      #090b18 0%,
+      #1c1020 50%,
+      #280b18 100%
+    );
 }
 
 
-/* ANA SAYFA */
+/* ANA ALAN */
 
 .hero {
-    min-height: 100vh;
+  min-height: 100vh;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 
-    text-align: center;
+  text-align: center;
 
-    padding: 40px 20px;
+  padding: 45px 20px 80px;
 
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 }
 
 
 /* BAŞLIK */
 
 .title-area {
-    animation: fadeDown 1.5s ease;
+  animation: fadeDown 1.4s ease;
 }
 
 .small-title {
-    font-size: 12px;
-    letter-spacing: 5px;
-
-    color: #ff9ebd;
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: #ffadc5;
 }
 
 h1 {
-    margin-top: 15px;
+  margin-top: 14px;
 
-    font-size: clamp(40px, 6vw, 75px);
+  font-size: clamp(42px, 6vw, 78px);
 
-    font-style: italic;
-    font-weight: normal;
+  font-weight: normal;
+  font-style: italic;
 
-    line-height: 1.05;
+  line-height: 1.05;
 
-    text-shadow:
-        0 0 20px rgba(255,255,255,.2);
+  text-shadow:
+    0 0 20px rgba(255,255,255,.12),
+    0 0 35px rgba(255,80,130,.12);
 }
 
 .title-area p {
+  margin-top: 14px;
 
-    margin-top: 12px;
+  font-size: 18px;
+  line-height: 1.6;
 
-    font-size: 18px;
-
-    color: #ffd7e3;
-
-    line-height: 1.6;
+  color: #ffdce6;
 }
 
-
-/* ÇİZGİ */
-
 .title-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  gap: 15px;
 
-    gap: 15px;
+  margin-top: 20px;
 
-    margin-top: 20px;
-
-    color: #ff8eae;
+  color: #ff668f;
 }
 
 .title-line span {
-
-    width: 100px;
-    height: 1px;
-
-    background: #ff8eae;
+  width: 100px;
+  height: 1px;
+  background: #ff668f;
 }
 
 
-/* BÜYÜK KALP */
+/* KALP ALANI */
 
-.heart-wrapper {
+.heart-stage {
+  position: relative;
 
-    position: relative;
+  width: min(900px, 95vw);
+  height: 430px;
 
-    width: 260px;
-    height: 240px;
-
-    margin-top: 50px;
-
-    cursor: pointer;
+  margin-top: 35px;
 }
 
 
-/* PARLAMA */
+/* ORTADAKİ KALP */
 
-.heart-glow {
+.center-heart {
+  position: absolute;
 
-    position: absolute;
+  left: 50%;
+  top: 50%;
 
-    width: 200px;
-    height: 200px;
+  width: 155px;
+  height: 155px;
 
-    top: 20px;
-    left: 30px;
+  transform:
+    translate(-50%, -42%)
+    rotate(-45deg);
 
-    border-radius: 50%;
+  background:
+    linear-gradient(
+      135deg,
+      #ff87aa,
+      #ff245f
+    );
 
-    background: #ff477e;
+  border-radius: 28px;
 
-    filter: blur(60px);
+  box-shadow:
+    0 0 18px #ff668e,
+    0 0 45px #ff356f,
+    0 0 90px #ff245f;
 
-    opacity: .8;
+  z-index: 5;
 
-    animation: glow 2s infinite alternate;
+  animation: heartbeat 1.6s infinite;
+}
+
+.center-heart::before,
+.center-heart::after {
+  content: "";
+
+  position: absolute;
+
+  width: 155px;
+  height: 155px;
+
+  background: inherit;
+
+  border-radius: 50%;
+}
+
+.center-heart::before {
+  top: -77px;
+  left: 0;
+}
+
+.center-heart::after {
+  top: 0;
+  left: 77px;
 }
 
 
-/* KALP */
+/* A HARFİ */
 
-.big-heart {
+.letter-a {
+  position: absolute;
 
-    position: absolute;
+  z-index: 10;
 
-    width: 170px;
-    height: 170px;
+  left: 50%;
+  top: 50%;
 
-    background:
-        linear-gradient(
-        135deg,
-        #ff9fba,
-        #ff3f78
-        );
+  transform:
+    translate(-30%, -27%)
+    rotate(45deg);
 
-    top: 30px;
-    left: 45px;
+  font-size: 95px;
 
-    transform: rotate(-45deg);
+  font-weight: normal;
 
-    border-radius: 20px;
+  color: #fff4f7;
 
-    box-shadow:
+  text-shadow:
+    0 0 8px white,
+    0 0 20px #ff8fb1,
+    0 0 40px #ff3f79;
 
-        0 0 15px #ff6f9a,
-        0 0 35px #ff4c83,
-        0 0 70px #ff356f;
-
-    animation: heartbeat 1.7s infinite;
+  pointer-events: none;
 }
 
 
-.big-heart::before,
-.big-heart::after {
+/* İKİ YANDAN GELEN KALPLER */
 
-    content: "";
+.heart-stream {
+  position: absolute;
 
-    position: absolute;
+  inset: 0;
 
-    width: 170px;
-    height: 170px;
-
-    background: inherit;
-
-    border-radius: 50%;
+  pointer-events: none;
 }
 
-.big-heart::before {
+.stream-heart {
+  position: absolute;
 
-    top: -85px;
-    left: 0;
+  font-size: 20px;
+
+  color: #ff557e;
+
+  opacity: 0;
+
+  text-shadow:
+    0 0 8px #ff5f87,
+    0 0 18px #ff2e67;
+
+  animation-fill-mode: forwards;
 }
 
-.big-heart::after {
 
-    left: 85px;
-    top: 0;
+/* SOL */
+
+.left-stream .stream-heart {
+  left: 4%;
+  top: 50%;
 }
 
 
-/* KALP İÇİ YAZI */
+/* SAĞ */
 
-.heart-text {
-
-    position: absolute;
-
-    z-index: 5;
-
-    width: 190px;
-
-    top: 48px;
-    left: 48px;
-
-    transform: rotate(45deg);
-
-    font-size: 20px;
-
-    line-height: 1.3;
-
-    text-align: center;
-
-    color: white;
-
-    text-shadow:
-        0 2px 8px rgba(100,0,30,.6);
+.right-stream .stream-heart {
+  right: 4%;
+  top: 50%;
 }
 
 
 /* BUTON */
 
-button {
+#loveButton {
+  margin-top: 5px;
 
-    margin-top: 10px;
+  border: 1px solid rgba(255,255,255,.25);
 
-    border: 1px solid rgba(255,255,255,.3);
+  border-radius: 999px;
 
-    border-radius: 50px;
+  padding: 15px 32px;
 
-    padding: 14px 32px;
+  background:
+    rgba(110, 16, 45, .82);
 
-    background:
-        rgba(130, 20, 55, .75);
+  color: white;
 
-    color: white;
+  font-size: 17px;
 
-    font-size: 16px;
+  cursor: pointer;
 
-    cursor: pointer;
+  transition: .3s ease;
 
-    backdrop-filter: blur(10px);
-
-    transition: .3s;
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.25);
+  box-shadow:
+    0 0 25px rgba(255,45,100,.18);
 }
 
-button:hover {
+#loveButton:hover {
+  transform: scale(1.07);
 
-    transform: scale(1.08);
+  background:
+    rgba(170, 25, 65, .95);
 
-    background:
-        rgba(180, 35, 80, .9);
-
-    box-shadow:
-        0 0 30px rgba(255,80,130,.6);
+  box-shadow:
+    0 0 30px rgba(255,65,110,.5);
 }
 
 
 /* MESAJ */
 
 .love-message {
+  max-width: 700px;
 
-    max-height: 0;
+  max-height: 0;
 
-    opacity: 0;
+  opacity: 0;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    max-width: 650px;
+  margin-top: 0;
 
-    margin-top: 0;
-
-    transition:
-        opacity 1.5s ease,
-        max-height 2s ease,
-        margin 1s ease;
+  transition:
+    max-height 1.5s ease,
+    opacity 1.2s ease,
+    margin-top 1.2s ease;
 }
 
 .love-message.show {
+  max-height: 650px;
 
-    max-height: 600px;
+  opacity: 1;
 
-    opacity: 1;
+  margin-top: 70px;
+}
 
-    margin-top: 60px;
+.moon {
+  font-size: 90px;
+
+  color: #fff7cc;
+
+  text-shadow:
+    0 0 12px white,
+    0 0 30px #ffe99e,
+    0 0 60px #ffe16d;
+
+  margin-bottom: 14px;
 }
 
 .love-message p {
+  font-size: clamp(21px, 3vw, 30px);
 
-    font-size: clamp(20px, 3vw, 30px);
+  line-height: 1.7;
 
-    line-height: 1.7;
+  font-style: italic;
 
-    font-style: italic;
+  color: #ffe9ef;
 
-    color: #ffe3ec;
-
-    text-shadow:
-        0 0 15px rgba(255,100,150,.5);
+  text-shadow:
+    0 0 15px rgba(255,95,140,.45);
 }
-
-
-/* AY */
-
-.moon {
-
-    font-size: 85px;
-
-    margin-bottom: 15px;
-
-    color: #fff6cf;
-
-    text-shadow:
-
-        0 0 10px white,
-        0 0 30px #fff1a8,
-        0 0 60px #ffe57a;
-
-    animation: moonGlow 2s infinite alternate;
-}
-
 
 .message-heart {
+  margin-top: 18px;
 
-    font-size: 35px;
+  font-size: 35px;
 
-    margin-top: 20px;
+  color: #ff628c;
 
-    color: #ff6c98;
-
-    animation: heartbeatSmall 1s infinite;
+  animation: heartbeatSmall 1s infinite;
 }
 
 
 /* UÇAN KALPLER */
 
 #floatingHearts {
+  position: fixed;
+  inset: 0;
 
-    position: fixed;
+  overflow: hidden;
 
-    inset: 0;
+  pointer-events: none;
 
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 1;
+  z-index: 1;
 }
 
 .floating-heart {
+  position: absolute;
 
-    position: absolute;
+  bottom: -40px;
 
-    bottom: -50px;
+  color: #ff6088;
 
-    color: #ff6c98;
+  text-shadow:
+    0 0 10px #ff376e;
 
-    animation: floatHeart linear forwards;
-
-    text-shadow:
-        0 0 10px #ff477e;
+  animation: floatHeart linear forwards;
 }
 
 
 /* ANİMASYONLAR */
 
 @keyframes heartbeat {
+  0%, 100% {
+    transform:
+      translate(-50%, -42%)
+      rotate(-45deg)
+      scale(1);
+  }
 
-    0%, 100% {
-        transform:
-            rotate(-45deg)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            rotate(-45deg)
-            scale(1.07);
-    }
+  50% {
+    transform:
+      translate(-50%, -42%)
+      rotate(-45deg)
+      scale(1.08);
+  }
 }
-
 
 @keyframes heartbeatSmall {
+  0%, 100% {
+    transform: scale(1);
+  }
 
-    0%,100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.25);
-    }
+  50% {
+    transform: scale(1.2);
+  }
 }
-
-
-@keyframes glow {
-
-    from {
-        transform: scale(.9);
-        opacity: .5;
-    }
-
-    to {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-}
-
-
-@keyframes moonGlow {
-
-    from {
-        filter: brightness(1);
-    }
-
-    to {
-        filter: brightness(1.4);
-    }
-}
-
 
 @keyframes floatHeart {
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg);
 
-    0% {
+    opacity: 0;
+  }
 
-        transform:
-            translateY(0)
-            rotate(0deg);
+  15% {
+    opacity: 1;
+  }
 
-        opacity: 0;
-    }
+  100% {
+    transform:
+      translateY(-110vh)
+      rotate(360deg);
 
-    15% {
-        opacity: 1;
-    }
+    opacity: 0;
+  }
+}
 
-    100% {
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 
-        transform:
-            translateY(-110vh)
-            rotate(360deg);
-
-        opacity: 0;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
-@keyframes fadeDown {
+/* SOLDAN ORTAYA */
 
-    from {
+@keyframes flyFromLeft {
+  0% {
+    transform:
+      translate(0, 0)
+      scale(.6)
+      rotate(0deg);
 
-        opacity: 0;
+    opacity: 0;
+  }
 
-        transform:
-            translateY(-30px);
-    }
+  15% {
+    opacity: 1;
+  }
 
-    to {
+  100% {
+    transform:
+      translate(var(--x), var(--y))
+      scale(1.1)
+      rotate(360deg);
 
-        opacity: 1;
+    opacity: 1;
+  }
+}
 
-        transform:
-            translateY(0);
-    }
+
+/* SAĞDAN ORTAYA */
+
+@keyframes flyFromRight {
+  0% {
+    transform:
+      translate(0, 0)
+      scale(.6)
+      rotate(0deg);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(var(--x), var(--y))
+      scale(1.1)
+      rotate(-360deg);
+
+    opacity: 1;
+  }
 }
 
 
 /* TELEFON */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
-    h1 {
-        font-size: 42px;
-    }
+  h1 {
+    font-size: 44px;
+  }
 
-    .title-area p {
-        font-size: 15px;
-    }
+  .title-area p {
+    font-size: 15px;
+  }
 
-    .heart-wrapper {
-        transform: scale(.85);
-        margin-top: 35px;
-    }
+  .heart-stage {
+    height: 340px;
+  }
 
-    .love-message p {
-        font-size: 20px;
-    }
+  .center-heart {
+    width: 120px;
+    height: 120px;
+  }
 
+  .center-heart::before,
+  .center-heart::after {
+    width: 120px;
+    height: 120px;
+  }
+
+  .center-heart::before {
+    top: -60px;
+  }
+
+  .center-heart::after {
+    left: 60px;
+  }
+
+  .letter-a {
+    font-size: 72px;
+  }
+
+  .love-message p {
+    font-size: 20px;
+  }
 }
