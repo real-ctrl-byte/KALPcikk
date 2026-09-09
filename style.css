@@ -471,3 +471,95 @@ h1 {
     margin-top: -8px;
   }
 }
+.touch-ripple-heart {
+  position: fixed;
+
+  transform: translate(-50%, -50%) scale(0);
+
+  font-size: 28px;
+
+  color: #ff5d8f;
+
+  pointer-events: none;
+
+  z-index: 9998;
+
+  text-shadow:
+    0 0 10px #ff5d8f,
+    0 0 25px #ff2f70,
+    0 0 50px #ff174f;
+
+  animation: touchHeartOpen .8s ease forwards;
+}
+
+@keyframes touchHeartOpen {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(2.2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.5);
+  }
+}
+
+
+/* YAZILAN MESAJ DAHA GÜZEL GÖRÜNSÜN */
+
+.written-love {
+  min-width: 140px;
+
+  max-width: 270px;
+
+  padding: 20px 24px;
+
+  border: 1px solid rgba(255, 190, 210, .45);
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255, 120, 160, .95),
+      rgba(130, 15, 60, .95)
+    );
+
+  box-shadow:
+    0 0 15px #ff5f90,
+    0 0 35px rgba(255, 50, 110, .55);
+
+  cursor: pointer;
+
+  pointer-events: auto;
+}
+
+
+/* MESAJIN ÜSTÜNE BASINCA */
+
+.written-love.pop {
+  animation: messagePop .55s ease;
+}
+
+@keyframes messagePop {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.22);
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
