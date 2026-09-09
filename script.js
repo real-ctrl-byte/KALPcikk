@@ -1,238 +1,484 @@
+const particles =
+    document.getElementById("particles");
+
 const loveButton =
-  document.getElementById("loveButton");
+    document.getElementById("loveButton");
 
 const loveMessage =
-  document.getElementById("loveMessage");
+    document.getElementById("loveMessage");
 
-const floatingHearts =
-  document.getElementById("floatingHearts");
-
-const leftStream =
-  document.getElementById("leftStream");
-
-const rightStream =
-  document.getElementById("rightStream");
+const backgroundHearts =
+    document.getElementById("backgroundHearts");
 
 
-/* KALP ŞEKLİ FORMÜLÜ */
-
-function getHeartPoint(t, scale = 8) {
-
-  const x =
-    16 * Math.pow(Math.sin(t), 3);
-
-  const y =
-    13 * Math.cos(t)
-    - 5 * Math.cos(2 * t)
-    - 2 * Math.cos(3 * t)
-    - Math.cos(4 * t);
-
-  return {
-    x: x * scale,
-    y: -y * scale
-  };
-}
+const svg =
+    document.querySelector(".heart-svg");
 
 
-/* İKİ YANDAN KALPLER GELİYOR */
+/* =========================
+   SVG YOLUNDAN NOKTA AL
+========================= */
 
-function createSideHeartStream() {
+function getScreenPoint(path, percent) {
 
-  leftStream.innerHTML = "";
-  rightStream.innerHTML = "";
-
-  const total = 70;
-
-  for (let i = 0; i < total; i++) {
-
-    const t =
-      (Math.PI * 2 * i) / total;
+    const length =
+        path.getTotalLength();
 
     const point =
-      getHeartPoint(t, 8.8);
+        path.getPointAtLength(
+            length * percent
+        );
 
+    const svgPoint =
+        svg.createSVGPoint();
 
-    /* SOL TARAFTAN */
+    svgPoint.x =
+        point.x;
 
-    const leftHeart =
-      document.createElement("div");
+    svgPoint.y =
+        point.y;
 
-    leftHeart.className =
-      "stream-heart";
+    const matrix =
+        svg.getScreenCTM();
 
-    leftHeart.innerHTML =
-      i % 3 === 0 ? "♥" : "♡";
+    const screenPoint =
+        svgPoint.matrixTransform(
+            matrix
+        );
 
-    leftHeart.style.fontSize =
-      12 + Math.random() * 13 + "px";
+    const parentRect =
+        particles
+        .getBoundingClientRect();
 
-    leftHeart.style.setProperty(
-      "--x",
-      `calc(50vw - 80px + ${point.x}px)`
-    );
+    return {
 
-    leftHeart.style.setProperty(
-      "--y",
-      `${point.y}px`
-    );
+        x:
+            screenPoint.x
+            - parentRect.left,
 
-    leftHeart.style.animation =
-      `flyFromLeft 1.8s ease-out ${
-        i * 0.025
-      }s forwards`;
-
-    leftStream.appendChild(
-      leftHeart
-    );
-
-
-    /* SAĞ TARAFTAN */
-
-    const rightHeart =
-      document.createElement("div");
-
-    rightHeart.className =
-      "stream-heart";
-
-    rightHeart.innerHTML =
-      i % 3 === 0 ? "♥" : "♡";
-
-    rightHeart.style.fontSize =
-      12 + Math.random() * 13 + "px";
-
-    rightHeart.style.setProperty(
-      "--x",
-      `calc(-50vw + 80px + ${point.x}px)`
-    );
-
-    rightHeart.style.setProperty(
-      "--y",
-      `${point.y}px`
-    );
-
-    rightHeart.style.animation =
-      `flyFromRight 1.8s ease-out ${
-        i * 0.025
-      }s forwards`;
-
-    rightStream.appendChild(
-      rightHeart
-    );
-  }
+        y:
+            screenPoint.y
+            - parentRect.top
+    };
 }
 
 
-/* SAYFA AÇILINCA BAŞLASIN */
+/* =========================
+   KALP PARÇACIĞI OLUŞTUR
+========================= */
 
-window.addEventListener(
-  "load",
-  () => {
+function makeHeart(
+    x,
+    y,
+    delay,
+    size
+) {
 
-    setTimeout(() => {
+    const heart =
+        document.createElement(
+            "div"
+        );
 
-      createSideHeartStream();
+    heart.className =
+        "heart-particle";
 
-    }, 700);
-
-  }
-);
-
-
-/* BUTONA BASINCA MESAJ */
-
-loveButton.addEventListener(
-  "click",
-  () => {
-
-    createSideHeartStream();
-
-    loveMessage.classList.add(
-      "show"
-    );
-
-    loveButton.innerHTML =
-      "♥ Sen Benim Her Şeyimsin";
-
-    createHeartExplosion();
-
-    setTimeout(() => {
-
-      loveMessage.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
-
-    }, 700);
-  }
-);
-
-
-/* ARKA PLANDA UÇAN KALPLER */
-
-function createFloatingHeart() {
-
-  const heart =
-    document.createElement("div");
-
-  heart.className =
-    "floating-heart";
-
-  const hearts = [
-    "♥",
-    "♡",
-    "❤"
-  ];
-
-  heart.innerHTML =
-    hearts[
-      Math.floor(
-        Math.random()
-        * hearts.length
-      )
+    const types = [
+        "♥",
+        "♡",
+        "❤"
     ];
 
-  heart.style.left =
-    Math.random() * 100 + "vw";
+    heart.innerHTML =
+        types[
+            Math.floor(
+                Math.random()
+                * types.length
+            )
+        ];
 
-  heart.style.fontSize =
-    Math.random() * 18 + 12 + "px";
+    heart.style.left =
+        x + "px";
 
-  heart.style.animationDuration =
-    Math.random() * 4 + 6 + "s";
+    heart.style.top =
+        y + "px";
 
-  floatingHearts.appendChild(
-    heart
-  );
+    heart.style.fontSize =
+        size + "px";
 
-  setTimeout(() => {
+    heart.style.transform =
+        "translate(-50%, -50%) scale(0)";
 
-    heart.remove();
+    particles.appendChild(
+        heart
+    );
 
-  }, 10000);
+
+    setTimeout(() => {
+
+        heart.classList.add(
+            "visible"
+        );
+
+        heart.animate(
+
+            [
+
+                {
+                    transform:
+                        "translate(-50%, -50%) scale(0)"
+                },
+
+                {
+                    transform:
+                        "translate(-50%, -50%) scale(1.5)"
+                },
+
+                {
+                    transform:
+                        "translate(-50%, -50%) scale(1)"
+                }
+
+            ],
+
+            {
+
+                duration: 650,
+
+                easing:
+                    "cubic-bezier(.2,.8,.3,1)",
+
+                fill:
+                    "forwards"
+            }
+
+        );
+
+    }, delay);
+}
+
+
+/* =========================
+   PARILTI
+========================= */
+
+function makeSpark(
+    x,
+    y,
+    delay
+) {
+
+    const spark =
+        document.createElement(
+            "div"
+        );
+
+    spark.className =
+        "spark";
+
+    spark.style.left =
+        (
+            x
+            + Math.random() * 50
+            - 25
+        )
+        + "px";
+
+    spark.style.top =
+        (
+            y
+            + Math.random() * 50
+            - 25
+        )
+        + "px";
+
+    spark.style.opacity =
+        "0";
+
+    particles.appendChild(
+        spark
+    );
+
+
+    setTimeout(() => {
+
+        spark.style.opacity =
+            "1";
+
+    }, delay);
+}
+
+
+/* =========================
+   BİR YOLU DOLDUR
+========================= */
+
+function fillPath(
+    pathID,
+    reverse,
+    startDelay
+) {
+
+    const path =
+        document.getElementById(
+            pathID
+        );
+
+    const amount =
+        55;
+
+
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
+
+        let percent =
+            i
+            / (amount - 1);
+
+
+        if (reverse) {
+
+            percent =
+                1 - percent;
+        }
+
+
+        const point =
+            getScreenPoint(
+                path,
+                percent
+            );
+
+
+        const delay =
+            startDelay
+            + i * 25;
+
+
+        makeHeart(
+
+            point.x
+            + Math.random() * 15
+            - 7,
+
+            point.y
+            + Math.random() * 15
+            - 7,
+
+            delay,
+
+            12
+            + Math.random() * 18
+        );
+
+
+        if (
+            i % 3 === 0
+        ) {
+
+            makeSpark(
+
+                point.x,
+
+                point.y,
+
+                delay
+            );
+        }
+    }
+}
+
+
+/* =========================
+   ANA ANİMASYON
+========================= */
+
+function startHeartAnimation() {
+
+    particles.innerHTML =
+        "";
+
+
+    /*
+       Önce iki ekran kenarından
+       ortaya doğru geliyorlar.
+    */
+
+    fillPath(
+        "leftPath",
+        false,
+        0
+    );
+
+    fillPath(
+        "rightPath",
+        false,
+        0
+    );
+
+
+    /*
+       Sonra kalbin iç kıvrımları
+       tamamlanıyor.
+    */
+
+    setTimeout(() => {
+
+        fillPath(
+            "leftInner",
+            true,
+            0
+        );
+
+        fillPath(
+            "rightInner",
+            true,
+            0
+        );
+
+    }, 900);
+}
+
+
+/* SAYFA AÇILINCA */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(
+
+            startHeartAnimation,
+
+            500
+        );
+    }
+);
+
+
+/* =========================
+   BUTON
+========================= */
+
+loveButton.addEventListener(
+    "click",
+    () => {
+
+        startHeartAnimation();
+
+        loveMessage
+            .classList
+            .add("show");
+
+
+        loveButton.innerHTML =
+            "♥ Sen Benim Her Şeyimsin";
+
+
+        heartExplosion();
+
+
+        setTimeout(() => {
+
+            loveMessage
+                .scrollIntoView({
+
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "center"
+                });
+
+        }, 1100);
+    }
+);
+
+
+/* =========================
+   ARKA PLAN KALPLERİ
+========================= */
+
+function backgroundHeart() {
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+    heart.className =
+        "bg-heart";
+
+    heart.innerHTML =
+        Math.random() > .5
+        ? "♥"
+        : "♡";
+
+
+    heart.style.left =
+        Math.random()
+        * 100
+        + "vw";
+
+
+    heart.style.fontSize =
+        (
+            10
+            + Math.random()
+            * 18
+        )
+        + "px";
+
+
+    heart.style.animationDuration =
+        (
+            6
+            + Math.random()
+            * 5
+        )
+        + "s";
+
+
+    backgroundHearts
+        .appendChild(
+            heart
+        );
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    }, 11000);
 }
 
 
 setInterval(
-  createFloatingHeart,
-  750
+    backgroundHeart,
+    600
 );
 
 
-/* TIKLAYINCA KALP PATLAMASI */
+/* =========================
+   BUTONA BASINCA
+   KALP PATLAMASI
+========================= */
 
-function createHeartExplosion() {
+function heartExplosion() {
 
-  for (
-    let i = 0;
-    i < 30;
-    i++
-  ) {
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
 
-    setTimeout(() => {
+        setTimeout(
 
-      createFloatingHeart();
+            backgroundHeart,
 
-    }, i * 45);
-
-  }
+            i * 40
+        );
+    }
 }
