@@ -1,484 +1,186 @@
-const particles =
-    document.getElementById("particles");
-
-const loveButton =
-    document.getElementById("loveButton");
-
-const loveMessage =
-    document.getElementById("loveMessage");
-
-const backgroundHearts =
-    document.getElementById("backgroundHearts");
+const heartArea = document.querySelector(".heart-area");
+const leftHearts = document.getElementById("leftHearts");
+const rightHearts = document.getElementById("rightHearts");
+const loveButton = document.getElementById("loveButton");
+const loveMessage = document.getElementById("loveMessage");
 
 
-const svg =
-    document.querySelector(".heart-svg");
+function createHeart(x, y, delay) {
+  const heart = document.createElement("div");
 
+  heart.className = "side-heart";
+  heart.innerHTML = Math.random() > 0.35 ? "♥" : "♡";
 
-/* =========================
-   SVG YOLUNDAN NOKTA AL
-========================= */
+  heart.style.left = x + "%";
+  heart.style.top = y + "%";
 
-function getScreenPoint(path, percent) {
+  heart.style.fontSize =
+    (12 + Math.random() * 22) + "px";
 
-    const length =
-        path.getTotalLength();
+  heartArea.appendChild(heart);
 
-    const point =
-        path.getPointAtLength(
-            length * percent
-        );
-
-    const svgPoint =
-        svg.createSVGPoint();
-
-    svgPoint.x =
-        point.x;
-
-    svgPoint.y =
-        point.y;
-
-    const matrix =
-        svg.getScreenCTM();
-
-    const screenPoint =
-        svgPoint.matrixTransform(
-            matrix
-        );
-
-    const parentRect =
-        particles
-        .getBoundingClientRect();
-
-    return {
-
-        x:
-            screenPoint.x
-            - parentRect.left,
-
-        y:
-            screenPoint.y
-            - parentRect.top
-    };
+  setTimeout(() => {
+    heart.classList.add("show");
+  }, delay);
 }
 
 
-/* =========================
-   KALP PARÇACIĞI OLUŞTUR
-========================= */
+function drawHeart() {
 
-function makeHeart(
-    x,
-    y,
-    delay,
-    size
-) {
+  document.querySelectorAll(".side-heart")
+    .forEach(h => h.remove());
 
-    const heart =
-        document.createElement(
-            "div"
-        );
 
-    heart.className =
-        "heart-particle";
+  const total = 90;
 
-    const types = [
-        "♥",
-        "♡",
-        "❤"
-    ];
+  for (let i = 0; i < total; i++) {
 
-    heart.innerHTML =
-        types[
-            Math.floor(
-                Math.random()
-                * types.length
-            )
-        ];
+    const t = (Math.PI * 2 * i) / total;
 
-    heart.style.left =
-        x + "px";
+    const x =
+      16 * Math.pow(Math.sin(t), 3);
 
-    heart.style.top =
-        y + "px";
+    const y =
+      13 * Math.cos(t)
+      - 5 * Math.cos(2 * t)
+      - 2 * Math.cos(3 * t)
+      - Math.cos(4 * t);
 
-    heart.style.fontSize =
-        size + "px";
+    const finalX =
+      50 + x * 2.7;
 
-    heart.style.transform =
-        "translate(-50%, -50%) scale(0)";
-
-    particles.appendChild(
-        heart
-    );
-
-
-    setTimeout(() => {
-
-        heart.classList.add(
-            "visible"
-        );
-
-        heart.animate(
-
-            [
-
-                {
-                    transform:
-                        "translate(-50%, -50%) scale(0)"
-                },
-
-                {
-                    transform:
-                        "translate(-50%, -50%) scale(1.5)"
-                },
-
-                {
-                    transform:
-                        "translate(-50%, -50%) scale(1)"
-                }
-
-            ],
-
-            {
-
-                duration: 650,
-
-                easing:
-                    "cubic-bezier(.2,.8,.3,1)",
-
-                fill:
-                    "forwards"
-            }
-
-        );
-
-    }, delay);
-}
-
-
-/* =========================
-   PARILTI
-========================= */
-
-function makeSpark(
-    x,
-    y,
-    delay
-) {
-
-    const spark =
-        document.createElement(
-            "div"
-        );
-
-    spark.className =
-        "spark";
-
-    spark.style.left =
-        (
-            x
-            + Math.random() * 50
-            - 25
-        )
-        + "px";
-
-    spark.style.top =
-        (
-            y
-            + Math.random() * 50
-            - 25
-        )
-        + "px";
-
-    spark.style.opacity =
-        "0";
-
-    particles.appendChild(
-        spark
-    );
-
-
-    setTimeout(() => {
-
-        spark.style.opacity =
-            "1";
-
-    }, delay);
-}
-
-
-/* =========================
-   BİR YOLU DOLDUR
-========================= */
-
-function fillPath(
-    pathID,
-    reverse,
-    startDelay
-) {
-
-    const path =
-        document.getElementById(
-            pathID
-        );
-
-    const amount =
-        55;
-
-
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
-
-        let percent =
-            i
-            / (amount - 1);
-
-
-        if (reverse) {
-
-            percent =
-                1 - percent;
-        }
-
-
-        const point =
-            getScreenPoint(
-                path,
-                percent
-            );
-
-
-        const delay =
-            startDelay
-            + i * 25;
-
-
-        makeHeart(
-
-            point.x
-            + Math.random() * 15
-            - 7,
-
-            point.y
-            + Math.random() * 15
-            - 7,
-
-            delay,
-
-            12
-            + Math.random() * 18
-        );
-
-
-        if (
-            i % 3 === 0
-        ) {
-
-            makeSpark(
-
-                point.x,
-
-                point.y,
-
-                delay
-            );
-        }
-    }
-}
-
-
-/* =========================
-   ANA ANİMASYON
-========================= */
-
-function startHeartAnimation() {
-
-    particles.innerHTML =
-        "";
+    const finalY =
+      48 - y * 2.1;
 
 
     /*
-       Önce iki ekran kenarından
-       ortaya doğru geliyorlar.
+      SOL VE SAĞ TARAF
+      AYRI GECİKMELERLE GELİYOR
     */
 
-    fillPath(
-        "leftPath",
-        false,
-        0
-    );
+    let delay;
 
-    fillPath(
-        "rightPath",
-        false,
-        0
-    );
-
-
-    /*
-       Sonra kalbin iç kıvrımları
-       tamamlanıyor.
-    */
-
-    setTimeout(() => {
-
-        fillPath(
-            "leftInner",
-            true,
-            0
-        );
-
-        fillPath(
-            "rightInner",
-            true,
-            0
-        );
-
-    }, 900);
-}
-
-
-/* SAYFA AÇILINCA */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        setTimeout(
-
-            startHeartAnimation,
-
-            500
-        );
+    if (finalX < 50) {
+      delay =
+        Math.abs(finalX - 50) * 14;
+    } else {
+      delay =
+        Math.abs(finalX - 50) * 14;
     }
-);
+
+    createHeart(
+      finalX,
+      finalY,
+      800 - delay
+    );
+  }
 
 
-/* =========================
-   BUTON
-========================= */
+  /*
+    EKRANIN İKİ KENARINDAN
+    İÇERİ AKAN EKSTRA KALPLER
+  */
 
-loveButton.addEventListener(
-    "click",
-    () => {
+  for (let i = 0; i < 35; i++) {
 
-        startHeartAnimation();
+    const left = document.createElement("div");
 
-        loveMessage
-            .classList
-            .add("show");
+    left.className = "side-heart";
+    left.innerHTML = "♥";
 
+    left.style.left = "0%";
+    left.style.top =
+      (10 + Math.random() * 65) + "%";
 
-        loveButton.innerHTML =
-            "♥ Sen Benim Her Şeyimsin";
-
-
-        heartExplosion();
-
-
-        setTimeout(() => {
-
-            loveMessage
-                .scrollIntoView({
-
-                    behavior:
-                        "smooth",
-
-                    block:
-                        "center"
-                });
-
-        }, 1100);
-    }
-);
-
-
-/* =========================
-   ARKA PLAN KALPLERİ
-========================= */
-
-function backgroundHeart() {
-
-    const heart =
-        document.createElement(
-            "div"
-        );
-
-    heart.className =
-        "bg-heart";
-
-    heart.innerHTML =
-        Math.random() > .5
-        ? "♥"
-        : "♡";
-
-
-    heart.style.left =
-        Math.random()
-        * 100
-        + "vw";
-
-
-    heart.style.fontSize =
-        (
-            10
-            + Math.random()
-            * 18
-        )
-        + "px";
-
-
-    heart.style.animationDuration =
-        (
-            6
-            + Math.random()
-            * 5
-        )
-        + "s";
-
-
-    backgroundHearts
-        .appendChild(
-            heart
-        );
+    heartArea.appendChild(left);
 
 
     setTimeout(() => {
 
-        heart.remove();
+      left.style.opacity = "1";
 
-    }, 11000);
+      left.animate(
+        [
+          {
+            left: "0%",
+            transform: "scale(.5)"
+          },
+
+          {
+            left: (35 + Math.random() * 12) + "%",
+            transform: "scale(1.2)"
+          }
+        ],
+        {
+          duration: 1300,
+          fill: "forwards",
+          easing: "ease-out"
+        }
+      );
+
+    }, i * 45);
+
+
+    const right = document.createElement("div");
+
+    right.className = "side-heart";
+    right.innerHTML = "♥";
+
+    right.style.left = "100%";
+    right.style.top =
+      (10 + Math.random() * 65) + "%";
+
+    heartArea.appendChild(right);
+
+
+    setTimeout(() => {
+
+      right.style.opacity = "1";
+
+      right.animate(
+        [
+          {
+            left: "100%",
+            transform: "scale(.5)"
+          },
+
+          {
+            left: (53 + Math.random() * 12) + "%",
+            transform: "scale(1.2)"
+          }
+        ],
+        {
+          duration: 1300,
+          fill: "forwards",
+          easing: "ease-out"
+        }
+      );
+
+    }, i * 45);
+  }
 }
 
 
-setInterval(
-    backgroundHeart,
-    600
-);
+window.addEventListener("load", () => {
+  setTimeout(drawHeart, 500);
+});
 
 
-/* =========================
-   BUTONA BASINCA
-   KALP PATLAMASI
-========================= */
+loveButton.addEventListener("click", () => {
 
-function heartExplosion() {
+  drawHeart();
 
-    for (
-        let i = 0;
-        i < 35;
-        i++
-    ) {
+  loveMessage.classList.add("show");
 
-        setTimeout(
+  loveButton.innerHTML =
+    "❤️ Sen Benim Her Şeyimsin";
 
-            backgroundHeart,
+  setTimeout(() => {
 
-            i * 40
-        );
-    }
-}
+    loveMessage.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  }, 1000);
+});
