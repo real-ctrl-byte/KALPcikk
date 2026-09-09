@@ -184,3 +184,211 @@ loveButton.addEventListener("click", () => {
 
   }, 1000);
 });
+const touchMessageBox =
+  document.getElementById("touchMessageBox");
+
+const touchInput =
+  document.getElementById("touchInput");
+
+const placeMessageButton =
+  document.getElementById("placeMessageButton");
+
+const closeTouchBox =
+  document.getElementById("closeTouchBox");
+
+const writtenMessages =
+  document.getElementById("writtenMessages");
+
+
+let touchX = 50;
+let touchY = 50;
+
+
+/*
+  EKRANA DOKUNUNCA / TIKLAYINCA
+*/
+
+document.addEventListener("pointerdown", (event) => {
+
+  /*
+    Buton, textarea ve açılan mesaj kutusuna
+    basınca tekrar pencere açılmasın.
+  */
+
+  if (
+    event.target.closest("button") ||
+    event.target.closest("textarea") ||
+    event.target.closest(".touch-card") ||
+    event.target.closest(".written-love")
+  ) {
+    return;
+  }
+
+
+  touchX =
+    (event.clientX / window.innerWidth) * 100;
+
+  touchY =
+    (event.clientY / window.innerHeight) * 100;
+
+
+  touchInput.value = "";
+
+  touchMessageBox.classList.add("show");
+
+
+  setTimeout(() => {
+    touchInput.focus();
+  }, 200);
+});
+
+
+/*
+  MESAJI EKRANA YAZ
+*/
+
+placeMessageButton.addEventListener("click", () => {
+
+  const text =
+    touchInput.value.trim();
+
+
+  if (text === "") {
+    return;
+  }
+
+
+  const message =
+    document.createElement("div");
+
+
+  message.className =
+    "written-love";
+
+
+  message.textContent =
+    text;
+
+
+  message.style.left =
+    touchX + "%";
+
+
+  message.style.top =
+    touchY + "%";
+
+
+  writtenMessages.appendChild(
+    message
+  );
+
+
+  touchMessageBox.classList.remove(
+    "show"
+  );
+
+
+  createMessageHearts(
+    touchX,
+    touchY
+  );
+});
+
+
+/*
+  KAPAT
+*/
+
+closeTouchBox.addEventListener("click", () => {
+
+  touchMessageBox.classList.remove(
+    "show"
+  );
+});
+
+
+/*
+  MESAJ ÇIKINCA KÜÇÜK KALP EFEKTİ
+*/
+
+function createMessageHearts(x, y) {
+
+  for (let i = 0; i < 12; i++) {
+
+    const heart =
+      document.createElement("div");
+
+    heart.innerHTML = "♥";
+
+    heart.style.position =
+      "fixed";
+
+    heart.style.left =
+      x + "%";
+
+    heart.style.top =
+      y + "%";
+
+    heart.style.zIndex =
+      "999";
+
+    heart.style.pointerEvents =
+      "none";
+
+    heart.style.color =
+      "#ff5c8a";
+
+    heart.style.fontSize =
+      (12 + Math.random() * 15)
+      + "px";
+
+
+    document.body.appendChild(
+      heart
+    );
+
+
+    const moveX =
+      Math.random() * 160 - 80;
+
+    const moveY =
+      -(60 + Math.random() * 120);
+
+
+    heart.animate(
+
+      [
+        {
+          transform:
+            "translate(-50%, -50%) scale(.5)",
+
+          opacity: 1
+        },
+
+        {
+          transform:
+            `translate(
+              calc(-50% + ${moveX}px),
+              calc(-50% + ${moveY}px)
+            ) scale(1.3)`,
+
+          opacity: 0
+        }
+      ],
+
+      {
+        duration:
+          900 + Math.random() * 500,
+
+        easing:
+          "ease-out"
+      }
+
+    );
+
+
+    setTimeout(() => {
+      heart.remove();
+    }, 1600);
+  }
+}
