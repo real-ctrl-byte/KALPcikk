@@ -273,3 +273,201 @@ h1 {
     font-size: 100px;
   }
 }
+.touch-message-box {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(5, 5, 15, .72);
+  backdrop-filter: blur(8px);
+
+  z-index: 9999;
+}
+
+.touch-message-box.show {
+  display: flex;
+}
+
+.touch-card {
+  position: relative;
+
+  width: min(420px, 92vw);
+
+  padding: 30px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(85, 15, 45, .96),
+      rgba(35, 10, 35, .96)
+    );
+
+  border: 1px solid rgba(255, 130, 170, .5);
+
+  box-shadow:
+    0 0 30px rgba(255, 50, 110, .35);
+
+  text-align: center;
+}
+
+.touch-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 28px;
+  font-weight: normal;
+  font-style: italic;
+
+  color: #ffe9ef;
+}
+
+.touch-card textarea {
+  width: 100%;
+  height: 130px;
+
+  resize: none;
+
+  padding: 16px;
+
+  border: 1px solid rgba(255, 140, 175, .4);
+  border-radius: 18px;
+
+  outline: none;
+
+  font-family: Georgia, serif;
+  font-size: 17px;
+
+  color: white;
+
+  background: rgba(255,255,255,.08);
+}
+
+.touch-card textarea::placeholder {
+  color: rgba(255,255,255,.55);
+}
+
+#placeMessageButton {
+  margin-top: 18px;
+
+  padding: 13px 25px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    135deg,
+    #ff477e,
+    #a9134b
+  );
+
+  color: white;
+
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-touch {
+  position: absolute;
+
+  right: 14px;
+  top: 10px;
+
+  border: none;
+  background: transparent;
+
+  color: #ffc4d4;
+
+  font-size: 30px;
+
+  cursor: pointer;
+}
+
+#writtenMessages {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 100;
+}
+
+.written-love {
+  position: absolute;
+
+  transform: translate(-50%, -50%) scale(0);
+
+  max-width: 260px;
+
+  padding: 18px 24px;
+
+  text-align: center;
+
+  font-family: Georgia, serif;
+  font-size: 18px;
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 85, 130, .88),
+      rgba(160, 20, 70, .88)
+    );
+
+  border-radius:
+    55% 55% 50% 50%;
+
+  box-shadow:
+    0 0 18px #ff5c8a,
+    0 0 40px rgba(255, 60, 120, .5);
+
+  animation:
+    messageAppear .6s ease forwards,
+    messageFloat 3s ease-in-out infinite 1s;
+
+  pointer-events: auto;
+}
+
+.written-love::before {
+  content: "♥";
+
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 25px;
+
+  color: #ffd4df;
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes messageFloat {
+  0%, 100% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -8px;
+  }
+}
