@@ -4,103 +4,252 @@
   box-sizing: border-box;
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   min-height: 100vh;
+
   overflow-x: hidden;
-  font-family: Georgia, "Times New Roman", serif;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   color: white;
 
   background:
-    radial-gradient(circle at 50% 65%, rgba(255, 20, 90, 0.24), transparent 32%),
-    linear-gradient(180deg, #070916 0%, #150b1d 50%, #360818 100%);
+    radial-gradient(
+      circle at 50% 72%,
+      rgba(255, 30, 100, 0.23),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      circle at 50% 5%,
+      rgba(100, 80, 180, 0.18),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      180deg,
+      #070912 0%,
+      #180b1b 50%,
+      #360817 100%
+    );
 }
+
+
+/* YILDIZLAR */
 
 .stars {
   position: fixed;
   inset: 0;
+
   pointer-events: none;
 
+  z-index: 0;
+
+  opacity: 0.3;
+
   background-image:
-    radial-gradient(white 1px, transparent 1px),
-    radial-gradient(#ff7098 1px, transparent 1px);
+    radial-gradient(
+      white 1px,
+      transparent 1px
+    ),
+
+    radial-gradient(
+      #ff7ba1 1px,
+      transparent 1px
+    );
 
   background-size:
-    85px 85px,
-    130px 130px;
+    80px 80px,
+    120px 120px;
 
-  opacity: .25;
+  background-position:
+    0 0,
+    35px 45px;
 }
+
+
+/* ANA ALAN */
 
 .hero {
   position: relative;
+
   z-index: 2;
 
   min-height: 100vh;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
 
   text-align: center;
 
-  padding: 35px 20px 100px;
+  padding:
+    35px
+    20px
+    100px;
 }
+
+
+/* ÜST YAZI */
 
 .top-text {
-  width: min(1200px, 90vw);
+  width: min(1200px, 92vw);
+
   text-align: left;
 
-  font-size: 16px;
-  letter-spacing: 2px;
+  color: #ffc2d3;
 
-  color: #ffc0d1;
+  font-size: 15px;
+
+  letter-spacing: 3px;
 }
 
+
+/* AY */
+
 .moon {
-  margin-top: 5px;
+  margin-top: 8px;
 
-  font-size: 75px;
+  font-size: 76px;
 
-  color: #fff5ce;
+  color: #fff4c7;
 
   text-shadow:
     0 0 10px white,
-    0 0 30px #ffe6a1;
+    0 0 30px #ffe49a;
 }
 
-h1 {
-  margin-top: 5px;
 
-  font-size: clamp(42px, 6vw, 76px);
+/* BAŞLIK */
+
+h1 {
+  margin-top: 6px;
+
+  font-size:
+    clamp(
+      42px,
+      6vw,
+      76px
+    );
 
   line-height: 1.05;
 
   font-style: italic;
+
   font-weight: normal;
 
   text-shadow:
-    0 0 25px rgba(255, 90, 130, .35);
+    0 0 25px rgba(255, 100, 140, 0.25);
 }
+
 
 .subtitle {
-  margin-top: 18px;
+  margin-top: 16px;
 
   font-size: 18px;
+
   line-height: 1.6;
 
-  color: #ffdbe5;
+  color: #ffdce6;
 }
 
 
-/* ANA KALP ALANI */
+/* =========================
+   KALP ALANI
+========================= */
 
 .heart-area {
   position: relative;
 
   width: min(1200px, 100vw);
+
   height: 440px;
 
-  margin-top: 15px;
+  margin-top: 10px;
+
+  overflow: hidden;
+}
+
+
+#heartParticles {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+}
+
+
+.heart-piece {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  color: #ff527e;
+
+  opacity: 0;
+
+  text-shadow:
+    0 0 7px #ff527e,
+    0 0 18px #ff1f62;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.7s ease;
+}
+
+
+.heart-piece.show {
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* YAN PARLAMALAR */
+
+.side-glow {
+  position: absolute;
+
+  top: 50%;
+
+  width: 150px;
+  height: 300px;
+
+  transform: translateY(-50%);
+
+  filter: blur(45px);
+
+  opacity: 0.25;
+
+  background: #ff245f;
+}
+
+
+.left-glow {
+  left: -80px;
+}
+
+
+.right-glow {
+  right: -80px;
 }
 
 
@@ -110,131 +259,234 @@ h1 {
   position: absolute;
 
   left: 50%;
-  top: 47%;
+  top: 48%;
 
-  transform: translate(-50%, -50%);
-
-  font-size: clamp(110px, 12vw, 170px);
-
-  color: white;
-
-  text-shadow:
-    0 0 10px white,
-    0 0 25px #ff668f,
-    0 0 60px #ff174f;
+  transform:
+    translate(-50%, -50%);
 
   z-index: 10;
 
-  animation: pulse 1.8s infinite;
-}
+  font-size:
+    clamp(
+      110px,
+      13vw,
+      175px
+    );
 
-
-/* KALPLER */
-
-.side-heart {
-  position: absolute;
-
-  font-size: 22px;
-
-  color: #ff547d;
-
-  opacity: 0;
+  color: #fff7f9;
 
   text-shadow:
-    0 0 8px #ff547d,
-    0 0 20px #ff174f;
+    0 0 8px white,
+    0 0 22px #ff7ba2,
+    0 0 50px #ff356f,
+    0 0 90px #ff174f;
 
-  transform: translate(-50%, -50%) scale(0);
-
-  transition:
-    opacity .4s,
-    transform .8s;
-}
-
-.side-heart.show {
-  opacity: 1;
-
-  transform:
-    translate(-50%, -50%)
-    scale(1);
+  animation:
+    letterPulse
+    1.8s
+    ease-in-out
+    infinite;
 }
 
 
-/* BUTON */
+/* =========================
+   BUTON
+========================= */
 
 #loveButton {
-  margin-top: -10px;
+  margin-top: -5px;
 
-  padding: 15px 35px;
+  padding:
+    15px
+    35px;
 
   border-radius: 999px;
 
-  border: 1px solid #ff7a9f;
+  border:
+    1px solid
+    rgba(255, 130, 165, 0.8);
 
-  background: linear-gradient(
-    135deg,
-    #651126,
-    #b7194d
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #641125,
+      #b7194d
+    );
 
   color: white;
 
   font-size: 17px;
 
+  font-family:
+    Georgia,
+    serif;
+
   cursor: pointer;
 
   box-shadow:
-    0 0 15px rgba(255, 60, 110, .5);
+    0 0 15px rgba(255, 60, 110, 0.45);
 
-  transition: .3s;
+  transition: 0.3s ease;
 }
+
 
 #loveButton:hover {
   transform: scale(1.08);
 
   box-shadow:
-    0 0 30px rgba(255, 60, 110, .8);
+    0 0 28px rgba(255, 70, 120, 0.8);
 }
 
 
-/* MESAJ */
+/* =========================
+   ROMANTİK MESAJ
+========================= */
 
 .love-message {
+  max-width: 700px;
+
   max-height: 0;
+
   opacity: 0;
+
   overflow: hidden;
 
   margin-top: 0;
 
   transition:
-    max-height 1.4s,
-    opacity 1.4s,
-    margin-top 1.4s;
+    max-height 1.5s ease,
+    opacity 1.3s ease,
+    margin-top 1.3s ease;
 }
 
+
 .love-message.show {
-  max-height: 600px;
+  max-height: 700px;
+
   opacity: 1;
 
   margin-top: 70px;
 }
 
-.message-moon {
-  font-size: 75px;
 
-  color: #fff4c6;
+.message-moon {
+  font-size: 78px;
+
+  color: #fff3c0;
 
   text-shadow:
-    0 0 10px white,
-    0 0 30px #ffe07a;
+    0 0 12px white,
+    0 0 35px #ffe285;
 }
+
 
 .love-message p {
   margin-top: 15px;
 
-  font-size: clamp(20px, 3vw, 30px);
+  font-size:
+    clamp(
+      20px,
+      3vw,
+      30px
+    );
 
   line-height: 1.7;
+
+  font-style: italic;
+
+  color: #ffe8ef;
+
+  text-shadow:
+    0 0 14px rgba(255, 90, 140, 0.4);
+}
+
+
+.message-heart {
+  margin-top: 20px;
+
+  font-size: 35px;
+
+  color: #ff628c;
+
+  animation:
+    littleBeat
+    1s
+    infinite;
+}
+
+
+/* =========================
+   DOKUNMA YAZI KUTUSU
+========================= */
+
+.touch-message-box {
+  position: fixed;
+
+  inset: 0;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(5, 5, 15, 0.75);
+
+  backdrop-filter:
+    blur(10px);
+
+  z-index: 9999;
+}
+
+
+.touch-message-box.show {
+  display: flex;
+}
+
+
+.touch-card {
+  position: relative;
+
+  width:
+    min(
+      420px,
+      92vw
+    );
+
+  padding:
+    32px
+    28px;
+
+  border-radius:
+    28px;
+
+  border:
+    1px solid
+    rgba(255, 140, 175, 0.45);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(90, 15, 45, 0.97),
+      rgba(35, 8, 30, 0.97)
+    );
+
+  box-shadow:
+    0 0 35px rgba(255, 50, 110, 0.35);
+
+  text-align: center;
+}
+
+
+.touch-card h2 {
+  margin-bottom: 20px;
+
+  font-size: 28px;
+
+  font-weight: normal;
 
   font-style: italic;
 
@@ -242,241 +494,105 @@ h1 {
 }
 
 
-@keyframes pulse {
-  0%, 100% {
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
-
-  50% {
-    transform:
-      translate(-50%, -50%)
-      scale(1.08);
-  }
-}
-
-@media (max-width: 650px) {
-  .top-text {
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 44px;
-  }
-
-  .heart-area {
-    height: 360px;
-  }
-
-  .center-letter {
-    font-size: 100px;
-  }
-}
-.touch-message-box {
-  position: fixed;
-  inset: 0;
-
-  display: none;
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(5, 5, 15, .72);
-  backdrop-filter: blur(8px);
-
-  z-index: 9999;
-}
-
-.touch-message-box.show {
-  display: flex;
-}
-
-.touch-card {
-  position: relative;
-
-  width: min(420px, 92vw);
-
-  padding: 30px;
-
-  border-radius: 28px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(85, 15, 45, .96),
-      rgba(35, 10, 35, .96)
-    );
-
-  border: 1px solid rgba(255, 130, 170, .5);
-
-  box-shadow:
-    0 0 30px rgba(255, 50, 110, .35);
-
-  text-align: center;
-}
-
-.touch-card h2 {
-  margin-bottom: 20px;
-
-  font-size: 28px;
-  font-weight: normal;
-  font-style: italic;
-
-  color: #ffe9ef;
-}
-
 .touch-card textarea {
   width: 100%;
-  height: 130px;
 
-  resize: none;
+  height: 130px;
 
   padding: 16px;
 
-  border: 1px solid rgba(255, 140, 175, .4);
-  border-radius: 18px;
+  resize: none;
 
   outline: none;
 
-  font-family: Georgia, serif;
-  font-size: 17px;
+  border-radius:
+    18px;
+
+  border:
+    1px solid
+    rgba(255, 150, 180, 0.35);
+
+  background:
+    rgba(255, 255, 255, 0.08);
 
   color: white;
 
-  background: rgba(255,255,255,.08);
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 17px;
 }
 
+
 .touch-card textarea::placeholder {
-  color: rgba(255,255,255,.55);
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
 }
+
 
 #placeMessageButton {
   margin-top: 18px;
 
-  padding: 13px 25px;
+  padding:
+    13px
+    25px;
 
   border: none;
-  border-radius: 999px;
 
-  background: linear-gradient(
-    135deg,
-    #ff477e,
-    #a9134b
-  );
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff477e,
+      #a9134b
+    );
 
   color: white;
 
   font-size: 16px;
+
   cursor: pointer;
 }
+
 
 .close-touch {
   position: absolute;
 
-  right: 14px;
+  right: 15px;
   top: 10px;
 
   border: none;
+
   background: transparent;
 
-  color: #ffc4d4;
+  color: #ffd1dd;
 
   font-size: 30px;
 
   cursor: pointer;
 }
 
-#writtenMessages {
-  position: fixed;
-  inset: 0;
 
-  pointer-events: none;
+/* =========================
+   DOKUNUNCA ÇIKAN KALP
+========================= */
 
-  z-index: 100;
-}
-
-.written-love {
-  position: absolute;
-
-  transform: translate(-50%, -50%) scale(0);
-
-  max-width: 260px;
-
-  padding: 18px 24px;
-
-  text-align: center;
-
-  font-family: Georgia, serif;
-  font-size: 18px;
-
-  color: white;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 85, 130, .88),
-      rgba(160, 20, 70, .88)
-    );
-
-  border-radius:
-    55% 55% 50% 50%;
-
-  box-shadow:
-    0 0 18px #ff5c8a,
-    0 0 40px rgba(255, 60, 120, .5);
-
-  animation:
-    messageAppear .6s ease forwards,
-    messageFloat 3s ease-in-out infinite 1s;
-
-  pointer-events: auto;
-}
-
-.written-love::before {
-  content: "♥";
-
-  display: block;
-
-  margin-bottom: 6px;
-
-  font-size: 25px;
-
-  color: #ffd4df;
-}
-
-@keyframes messageAppear {
-  from {
-    opacity: 0;
-    transform:
-      translate(-50%, -50%)
-      scale(0);
-  }
-
-  to {
-    opacity: 1;
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
-}
-
-@keyframes messageFloat {
-  0%, 100% {
-    margin-top: 0;
-  }
-
-  50% {
-    margin-top: -8px;
-  }
-}
 .touch-ripple-heart {
   position: fixed;
 
-  transform: translate(-50%, -50%) scale(0);
+  transform:
+    translate(-50%, -50%)
+    scale(0);
 
-  font-size: 28px;
+  font-size: 30px;
 
   color: #ff5d8f;
 
@@ -489,62 +605,229 @@ h1 {
     0 0 25px #ff2f70,
     0 0 50px #ff174f;
 
-  animation: touchHeartOpen .8s ease forwards;
-}
-
-@keyframes touchHeartOpen {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-  }
-
-  45% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(2.2);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(3.5);
-  }
+  animation:
+    touchHeartOpen
+    0.8s
+    ease
+    forwards;
 }
 
 
-/* YAZILAN MESAJ DAHA GÜZEL GÖRÜNSÜN */
+/* =========================
+   YAZILAN MESAJLAR
+========================= */
+
+#writtenMessages {
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 100;
+}
+
 
 .written-love {
+  position: absolute;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0);
+
   min-width: 140px;
 
   max-width: 270px;
 
-  padding: 20px 24px;
+  padding:
+    20px
+    24px;
 
-  border: 1px solid rgba(255, 190, 210, .45);
+  text-align: center;
+
+  border-radius:
+    26px;
+
+  border:
+    1px solid
+    rgba(255, 190, 210, 0.45);
 
   background:
     radial-gradient(
       circle at top,
-      rgba(255, 120, 160, .95),
-      rgba(130, 15, 60, .95)
+      rgba(255, 120, 160, 0.95),
+      rgba(130, 15, 60, 0.95)
     );
+
+  color: white;
+
+  font-size: 18px;
+
+  font-family:
+    Georgia,
+    serif;
 
   box-shadow:
     0 0 15px #ff5f90,
-    0 0 35px rgba(255, 50, 110, .55);
+    0 0 35px rgba(255, 50, 110, 0.55);
+
+  pointer-events: auto;
 
   cursor: pointer;
 
-  pointer-events: auto;
+  animation:
+    messageAppear
+    0.6s
+    ease
+    forwards;
 }
 
 
-/* MESAJIN ÜSTÜNE BASINCA */
+.written-love::before {
+  content: "♥";
+
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #ffd4df;
+
+  font-size: 25px;
+}
+
 
 .written-love.pop {
-  animation: messagePop .55s ease;
+  animation:
+    messagePop
+    0.55s
+    ease;
 }
 
+
+/* =========================
+   ARKA PLAN KALPLERİ
+========================= */
+
+#backgroundHearts {
+  position: fixed;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+.bg-heart {
+  position: absolute;
+
+  bottom: -50px;
+
+  color: #ff4775;
+
+  opacity: 0.5;
+
+  filter:
+    drop-shadow(
+      0 0 7px #ff4775
+    );
+
+  animation:
+    floatUp
+    linear
+    forwards;
+}
+
+
+/* =========================
+   ANİMASYONLAR
+========================= */
+
+@keyframes letterPulse {
+
+  0%,
+  100% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
+}
+
+
+@keyframes littleBeat {
+
+  0%,
+  100% {
+    transform:
+      scale(1);
+  }
+
+  50% {
+    transform:
+      scale(1.3);
+  }
+}
+
+
+@keyframes touchHeartOpen {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  45% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(2.2);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(3.6);
+  }
+}
+
+
+@keyframes messageAppear {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+
 @keyframes messagePop {
+
   0% {
     transform:
       translate(-50%, -50%)
@@ -554,12 +837,76 @@ h1 {
   50% {
     transform:
       translate(-50%, -50%)
-      scale(1.22);
+      scale(1.25);
   }
 
   100% {
     transform:
       translate(-50%, -50%)
       scale(1);
+  }
+}
+
+
+@keyframes floatUp {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(0);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform:
+      translateY(-110vh)
+      rotate(360deg);
+
+    opacity: 0;
+  }
+}
+
+
+/* TELEFON */
+
+@media (max-width: 650px) {
+
+  .top-text {
+    text-align: center;
+  }
+
+
+  .moon {
+    font-size: 58px;
+  }
+
+
+  h1 {
+    font-size: 43px;
+  }
+
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+
+  .heart-area {
+    height: 360px;
+  }
+
+
+  .center-letter {
+    font-size: 105px;
+  }
+
+
+  .love-message p {
+    font-size: 20px;
   }
 }
