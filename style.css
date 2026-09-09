@@ -1,798 +1,275 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-
-html {
-    scroll-behavior: smooth;
-}
-
 
 body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  color: white;
 
-    min-height: 100vh;
-
-    overflow-x: hidden;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    color: white;
-
-    background:
-
-        radial-gradient(
-            circle at 50% 70%,
-            rgba(255, 20, 90, .20),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(110, 80, 180, .15),
-            transparent 35%
-        ),
-
-        linear-gradient(
-            180deg,
-            #080914 0%,
-            #150b19 45%,
-            #300817 100%
-        );
+  background:
+    radial-gradient(circle at 50% 65%, rgba(255, 20, 90, 0.24), transparent 32%),
+    linear-gradient(180deg, #070916 0%, #150b1d 50%, #360818 100%);
 }
-
-
-/* YILDIZLAR */
 
 .stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
 
-    position: fixed;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#ff7098 1px, transparent 1px);
 
-    inset: 0;
+  background-size:
+    85px 85px,
+    130px 130px;
 
-    pointer-events: none;
-
-    z-index: 0;
-
-    background-image:
-
-        radial-gradient(
-            white 1px,
-            transparent 1px
-        ),
-
-        radial-gradient(
-            #ff8daf 1px,
-            transparent 1px
-        );
-
-    background-size:
-        70px 70px,
-        110px 110px;
-
-    background-position:
-        0 0,
-        25px 35px;
-
-    opacity: .25;
+  opacity: .25;
 }
-
-
-/* ANA SAYFA */
 
 .hero {
+  position: relative;
+  z-index: 2;
 
-    position: relative;
+  min-height: 100vh;
 
-    z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    min-height: 100vh;
+  text-align: center;
 
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-
-    padding:
-
-        30px
-        20px
-        100px;
+  padding: 35px 20px 100px;
 }
 
+.top-text {
+  width: min(1200px, 90vw);
+  text-align: left;
 
-/* SANA ÖZEL */
+  font-size: 16px;
+  letter-spacing: 2px;
 
-.top {
-
-    width: min(
-        1100px,
-        92vw
-    );
-
-    text-align: left;
-
-    color: #ffc5d6;
-
-    letter-spacing: 2px;
-
-    font-size: 14px;
+  color: #ffc0d1;
 }
-
-
-/* AY */
 
 .moon {
+  margin-top: 5px;
 
-    margin-top: 5px;
+  font-size: 75px;
 
-    font-size: 70px;
+  color: #fff5ce;
 
-    color: #fff5ca;
-
-    text-shadow:
-
-        0 0 10px white,
-
-        0 0 30px
-        rgba(
-            255,
-            230,
-            160,
-            .8
-        );
+  text-shadow:
+    0 0 10px white,
+    0 0 30px #ffe6a1;
 }
-
-
-/* BAŞLIK */
 
 h1 {
+  margin-top: 5px;
 
-    margin-top: 5px;
+  font-size: clamp(42px, 6vw, 76px);
 
-    font-size:
-        clamp(
-            42px,
-            5vw,
-            72px
-        );
+  line-height: 1.05;
 
-    line-height: 1.05;
+  font-style: italic;
+  font-weight: normal;
 
-    font-style: italic;
-
-    font-weight: normal;
-
-    text-shadow:
-
-        0 0 20px
-        rgba(
-            255,
-            100,
-            150,
-            .20
-        );
+  text-shadow:
+    0 0 25px rgba(255, 90, 130, .35);
 }
-
-
-.line {
-
-    margin-top: 20px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    color: #ff6d96;
-}
-
-
-.line span {
-
-    width: 110px;
-
-    height: 1px;
-
-    background: #ff6d96;
-}
-
 
 .subtitle {
+  margin-top: 18px;
 
-    margin-top: 15px;
+  font-size: 18px;
+  line-height: 1.6;
 
-    font-size: 18px;
-
-    line-height: 1.5;
-
-    color: #ffdbe5;
+  color: #ffdbe5;
 }
 
 
-/* =========================
-   KALP ALANI
-========================= */
+/* ANA KALP ALANI */
 
-.heart-scene {
+.heart-area {
+  position: relative;
 
-    position: relative;
+  width: min(1200px, 100vw);
+  height: 440px;
 
-    width: min(
-        1200px,
-        100vw
-    );
-
-    height: 500px;
-
-    margin-top: 5px;
-}
-
-
-/* SVG */
-
-.heart-svg {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    overflow: visible;
-}
-
-
-.heart-svg path {
-
-    fill: none;
-
-    stroke: transparent;
+  margin-top: 15px;
 }
 
 
 /* A HARFİ */
 
-.letter-container {
+.center-letter {
+  position: absolute;
 
-    position: absolute;
+  left: 50%;
+  top: 47%;
 
-    left: 50%;
+  transform: translate(-50%, -50%);
 
-    top: 54%;
+  font-size: clamp(110px, 12vw, 170px);
 
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
+  color: white;
 
-    z-index: 10;
+  text-shadow:
+    0 0 10px white,
+    0 0 25px #ff668f,
+    0 0 60px #ff174f;
 
-    display: flex;
+  z-index: 10;
 
-    flex-direction: column;
-
-    align-items: center;
+  animation: pulse 1.8s infinite;
 }
 
 
-.letter {
+/* KALPLER */
 
-    font-size:
-        clamp(
-            90px,
-            10vw,
-            145px
-        );
+.side-heart {
+  position: absolute;
 
-    line-height: 1;
+  font-size: 22px;
 
-    color: #fff2f6;
+  color: #ff547d;
 
-    text-shadow:
+  opacity: 0;
 
-        0 0 7px white,
+  text-shadow:
+    0 0 8px #ff547d,
+    0 0 20px #ff174f;
 
-        0 0 20px #ff668f,
+  transform: translate(-50%, -50%) scale(0);
 
-        0 0 45px #ff245f,
+  transition:
+    opacity .4s,
+    transform .8s;
+}
 
-        0 0 80px #ff174f;
+.side-heart.show {
+  opacity: 1;
 
-    animation:
-        letterGlow
-        2s
-        ease-in-out
-        infinite
-        alternate;
+  transform:
+    translate(-50%, -50%)
+    scale(1);
 }
 
 
-.small-heart {
-
-    color: #ff527f;
-
-    font-size: 22px;
-
-    text-shadow:
-
-        0 0 10px #ff527f,
-
-        0 0 25px #ff174f;
-
-    animation:
-        beat
-        1.2s
-        infinite;
-}
-
-
-.small-heart.bottom {
-
-    margin-top: 8px;
-}
-
-
-/* =========================
-   KALP PARÇACIKLARI
-========================= */
-
-#particles {
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    z-index: 5;
-}
-
-
-.heart-particle {
-
-    position: absolute;
-
-    left: 0;
-
-    top: 0;
-
-    color: #ff4f7e;
-
-    opacity: 0;
-
-    filter:
-
-        drop-shadow(
-            0 0 5px #ff416f
-        )
-
-        drop-shadow(
-            0 0 12px #ff174f
-        );
-
-    transition:
-        opacity .3s;
-}
-
-
-.heart-particle.visible {
-
-    opacity: 1;
-}
-
-
-.spark {
-
-    position: absolute;
-
-    width: 4px;
-
-    height: 4px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow:
-
-        0 0 6px white,
-
-        0 0 12px #ff4775;
-
-    animation:
-        sparkle
-        1.5s
-        infinite
-        alternate;
-}
-
-
-/* =========================
-   BUTON
-========================= */
+/* BUTON */
 
 #loveButton {
+  margin-top: -10px;
 
-    position: relative;
+  padding: 15px 35px;
 
-    z-index: 20;
+  border-radius: 999px;
 
-    margin-top: -10px;
+  border: 1px solid #ff7a9f;
 
-    padding:
+  background: linear-gradient(
+    135deg,
+    #651126,
+    #b7194d
+  );
 
-        15px
-        36px;
+  color: white;
 
-    border-radius: 999px;
+  font-size: 17px;
 
-    border:
+  cursor: pointer;
 
-        1px solid
-        rgba(
-            255,
-            130,
-            165,
-            .8
-        );
+  box-shadow:
+    0 0 15px rgba(255, 60, 110, .5);
 
-    color: white;
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 18px;
-
-    cursor: pointer;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            rgba(
-                100,
-                10,
-                40,
-                .9
-            ),
-            rgba(
-                180,
-                20,
-                65,
-                .9
-            )
-        );
-
-    box-shadow:
-
-        0 0 10px
-        rgba(
-            255,
-            80,
-            120,
-            .5
-        ),
-
-        0 0 30px
-        rgba(
-            255,
-            30,
-            90,
-            .25
-        );
-
-    transition: .3s;
+  transition: .3s;
 }
-
 
 #loveButton:hover {
+  transform: scale(1.08);
 
-    transform:
-        scale(1.08);
-
-    box-shadow:
-
-        0 0 20px
-        #ff4f7e,
-
-        0 0 45px
-        rgba(
-            255,
-            30,
-            90,
-            .5
-        );
+  box-shadow:
+    0 0 30px rgba(255, 60, 110, .8);
 }
 
 
-/* =========================
-   MESAJ
-========================= */
+/* MESAJ */
 
 .love-message {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 
-    max-height: 0;
+  margin-top: 0;
 
-    opacity: 0;
-
-    overflow: hidden;
-
-    margin-top: 0;
-
-    transition:
-
-        opacity
-        1.5s,
-
-        max-height
-        1.5s,
-
-        margin-top
-        1.5s;
-
-    color: #ffe7ee;
+  transition:
+    max-height 1.4s,
+    opacity 1.4s,
+    margin-top 1.4s;
 }
-
 
 .love-message.show {
+  max-height: 600px;
+  opacity: 1;
 
-    max-height: 600px;
-
-    opacity: 1;
-
-    margin-top: 70px;
+  margin-top: 70px;
 }
-
 
 .message-moon {
+  font-size: 75px;
 
-    font-size: 70px;
+  color: #fff4c6;
 
-    color: #fff3c2;
-
-    text-shadow:
-
-        0 0 15px white,
-
-        0 0 40px
-        #ffe69a;
-
-    margin-bottom: 20px;
+  text-shadow:
+    0 0 10px white,
+    0 0 30px #ffe07a;
 }
-
 
 .love-message p {
+  margin-top: 15px;
 
-    font-size:
-        clamp(
-            20px,
-            2.5vw,
-            28px
-        );
+  font-size: clamp(20px, 3vw, 30px);
 
-    font-style: italic;
+  line-height: 1.7;
 
-    line-height: 1.7;
+  font-style: italic;
+
+  color: #ffe8ef;
 }
 
 
-.main-message {
+@keyframes pulse {
+  0%, 100% {
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
 
-    margin-top: 15px;
+  50% {
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
 }
 
-
-.message-line {
-
-    margin-top: 25px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 15px;
-
-    color: #ff668f;
-}
-
-
-.message-line span {
-
-    width: 70px;
-
-    height: 1px;
-
-    background: #ff668f;
-}
-
-
-/* =========================
-   ARKA PLAN KALPLERİ
-========================= */
-
-#backgroundHearts {
-
-    position: fixed;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-
-.bg-heart {
-
-    position: absolute;
-
-    bottom: -50px;
-
-    color: #ff4775;
-
-    opacity: .5;
-
-    filter:
-
-        drop-shadow(
-            0 0 7px #ff4775
-        );
-
-    animation:
-
-        floatUp
-        linear
-        forwards;
-}
-
-
-/* =========================
-   ANİMASYON
-========================= */
-
-@keyframes floatUp {
-
-    0% {
-
-        transform:
-            translateY(0)
-            rotate(0);
-
-        opacity: 0;
-    }
-
-    15% {
-
-        opacity: .6;
-    }
-
-    100% {
-
-        transform:
-            translateY(-110vh)
-            rotate(360deg);
-
-        opacity: 0;
-    }
-}
-
-
-@keyframes letterGlow {
-
-    from {
-
-        transform:
-            scale(.96);
-    }
-
-    to {
-
-        transform:
-            scale(1.06);
-    }
-}
-
-
-@keyframes beat {
-
-    0%,
-    100% {
-
-        transform:
-            scale(1);
-    }
-
-    50% {
-
-        transform:
-            scale(1.3);
-    }
-}
-
-
-@keyframes sparkle {
-
-    from {
-
-        opacity: .2;
-
-        transform:
-            scale(.5);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            scale(1.5);
-    }
-}
-
-
-/* TELEFON */
-
-@media (
-    max-width: 650px
-) {
-
-    .moon {
-
-        font-size: 55px;
-    }
-
-
-    h1 {
-
-        font-size: 43px;
-    }
-
-
-    .subtitle {
-
-        font-size: 15px;
-    }
-
-
-    .heart-scene {
-
-        height: 390px;
-    }
-
-
-    .letter {
-
-        font-size: 90px;
-    }
-
-
-    .top {
-
-        text-align: center;
-    }
-
-
-    #loveButton {
-
-        margin-top: 5px;
-    }
+@media (max-width: 650px) {
+  .top-text {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .heart-area {
+    height: 360px;
+  }
+
+  .center-letter {
+    font-size: 100px;
+  }
 }
