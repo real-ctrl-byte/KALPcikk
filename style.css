@@ -1,0 +1,224 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+
+  background:
+    linear-gradient(
+      rgba(255, 230, 238, 0.55),
+      rgba(100, 20, 60, 0.55)
+    ),
+    url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1600&q=80");
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  z-index: 0;
+}
+
+.hero {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: min(90%, 550px);
+  padding: 45px 35px;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+
+  box-shadow:
+    0 25px 60px rgba(60, 0, 30, 0.35);
+
+  text-align: center;
+
+  backdrop-filter: blur(12px);
+
+  animation: cardEntrance 1.5s ease;
+}
+
+.flower {
+  font-size: 65px;
+  margin-bottom: 10px;
+
+  animation: flowerFloat 3s ease-in-out infinite;
+}
+
+h1 {
+  color: #8f1647;
+  font-size: clamp(35px, 7vw, 55px);
+  margin-bottom: 20px;
+}
+
+.message {
+  color: #552039;
+  font-size: 20px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.lilies {
+  font-size: 38px;
+  margin: 20px 0;
+
+  animation: flowerFloat 4s ease-in-out infinite;
+}
+
+button {
+  border: none;
+  padding: 15px 28px;
+
+  border-radius: 50px;
+
+  background: linear-gradient(
+    135deg,
+    #ff4f88,
+    #a51452
+  );
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(165, 20, 82, 0.35);
+
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 15px 35px rgba(165, 20, 82, 0.5);
+}
+
+.secret-message {
+  margin-top: 25px;
+
+  color: #b01858;
+
+  font-size: 25px;
+  font-weight: bold;
+
+  opacity: 0;
+
+  transform: translateY(15px);
+
+  transition: 0.7s;
+}
+
+.secret-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#heart-container {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+
+  bottom: -50px;
+
+  color: #ff336d;
+
+  animation: heartFly linear forwards;
+
+  filter: drop-shadow(
+    0 3px 5px rgba(100, 0, 30, 0.25)
+  );
+}
+
+@keyframes heartFly {
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg)
+      scale(0.7);
+
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateY(-115vh)
+      rotate(360deg)
+      scale(1.4);
+
+    opacity: 0;
+  }
+}
+
+@keyframes flowerFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 35px 22px;
+  }
+
+  .message {
+    font-size: 17px;
+  }
+
+  .lilies {
+    font-size: 30px;
+  }
+}
