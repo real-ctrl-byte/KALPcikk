@@ -1,57 +1,157 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Sana Özel ❤️</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
+
 <body>
 
   <div class="stars"></div>
 
+
   <main class="hero">
 
-    <div class="top-text">SANA ÖZEL ♡</div>
+    <div class="top-text">
+      SANA ÖZEL ♡
+    </div>
 
-    <div class="moon">☾</div>
+
+    <div class="moon">
+      ☾
+    </div>
+
 
     <h1>
       Sen, benim<br>
       en güzel hikâyemsin
     </h1>
 
+
     <p class="subtitle">
       İyi ki varsın, iyi ki benimlesin.<br>
       Her gün seninle daha güzel.
     </p>
 
+
+    <!-- KALP ALANI -->
+
     <div class="heart-area">
 
       <div id="leftHearts"></div>
+
       <div id="rightHearts"></div>
 
-      <div class="center-letter">A</div>
+      <div class="center-letter">
+        A
+      </div>
 
     </div>
+
+
+    <!-- KALBİME DOKUN BUTONU -->
 
     <button id="loveButton">
       ❤️ Kalbime Dokun
     </button>
 
-    <div id="loveMessage" class="love-message">
-      <div class="message-moon">☾</div>
+
+    <!-- ROMANTİK MESAJ -->
+
+    <div
+      id="loveMessage"
+      class="love-message"
+    >
+
+      <div class="message-moon">
+        ☾
+      </div>
+
 
       <p>
-        Ay ışığının altında,<br><br>
-        Karanlığım ve aydınlığım olman,<br>
-        her şeyim anlamına gelmen,<br>
+
+        Ay ışığının altında,
+
+        <br><br>
+
+        Karanlığım ve aydınlığım olman,
+
+        <br>
+
+        her şeyim anlamına gelmen,
+
+        <br>
+
         eşsizliğini anlatıyor bitanem.
+
       </p>
+
     </div>
 
   </main>
 
+
+
+  <!-- ========================= -->
+  <!-- EKRANA DOKUNUP MESAJ YAZMA -->
+  <!-- ========================= -->
+
+
+  <div
+    id="touchMessageBox"
+    class="touch-message-box"
+  >
+
+    <div class="touch-card">
+
+
+      <button
+        id="closeTouchBox"
+        class="close-touch"
+      >
+        ×
+      </button>
+
+
+      <h2>
+        Bir şey yaz ❤️
+      </h2>
+
+
+      <textarea
+        id="touchInput"
+        placeholder="İstediğini buraya yaz..."
+        maxlength="120"
+      ></textarea>
+
+
+      <button id="placeMessageButton">
+        Kalbe Yaz 💗
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- YAZILAN MESAJLAR BURADA ÇIKACAK -->
+
+  <div id="writtenMessages"></div>
+
+
+
+  <!-- JAVASCRIPT -->
+
   <script src="script.js"></script>
+
+
 </body>
+
 </html>
